@@ -1,0 +1,46 @@
+version: '2'
+
+services:
+  r20000:
+    image: 'carwestsam/redis-with-source'
+    container_name: redis-cluster-entry
+    ports:
+      - '20000:20000'
+      - '20001:20001'
+      - '20002:20002'
+      - '20003:20003'
+      - '20004:20004'
+      - '20005:20005'
+    volumes:
+      - ./configure/20000/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+  r20001:
+    image: 'carwestsam/redis-with-source'
+    volumes:
+      - ./configure/20001/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    network_mode: "service:r20000"
+  r20002:
+    image: 'carwestsam/redis-with-source'
+    volumes:
+      - ./configure/20002/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    network_mode: "service:r20000"
+  r20003:
+    image: 'carwestsam/redis-with-source'
+    volumes:
+      - ./configure/20003/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    network_mode: "service:r20000"
+  r20004:
+    image: 'carwestsam/redis-with-source'
+    volumes:
+      - ./configure/20004/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    network_mode: "service:r20000"
+  r20005:
+    image: 'carwestsam/redis-with-source'
+    volumes:
+      - ./configure/20005/redis.conf:/usr/local/etc/redis/redis.conf
+    command: redis-server /usr/local/etc/redis/redis.conf
+    network_mode: "service:r20000"
